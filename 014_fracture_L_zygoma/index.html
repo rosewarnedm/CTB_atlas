@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'>
+<title>014_fracture_L_zygoma</title>
+<style>
+
+        body { font-family: Arial, Helvetica, sans-serif; margin: 20px; color: #ddd; background: #111; }
+        h1, h2 { color: #eee; }
+        .key-images img { display: block; width: 650px; height: 650px; background: black; margin: 6px 0; }
+        .viewer-wrapper { margin-top: 24px; }
+        .viewer {
+            position: relative;
+            width: 650px;
+            height: 650px;
+            background: black;
+            border: 1px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            user-select: none;
+            overflow: hidden;
+        }
+        .viewer img {
+            width: 650px;
+            height: 650px;
+            object-fit: contain;
+            image-rendering: auto;
+        }
+        .hud {
+            position: absolute;
+            top: 6px;
+            left: 8px;
+            padding: 2px 6px;
+            background: rgba(0,0,0,0.5);
+            color: #ddd;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+        .controls {
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #ccc;
+            width: 650px;
+        }
+        input[type=range] { width: 100%; }
+        a, a:visited { color: #7abaff; }
+    
+</style>
+</head>
+<body>
+<h1>014_fracture_L_zygoma</h1>
+<h2>Key images</h2>
+<div class='key-images'>
+<img src='img/slice_0001.jpg' alt='CT slice'>
+<img src='img/slice_0002.jpg' alt='CT slice'>
+<img src='img/slice_0003.jpg' alt='CT slice'>
+<img src='img/slice_0004.jpg' alt='CT slice'>
+<img src='img/slice_0005.jpg' alt='CT slice'>
+<img src='img/slice_0006.jpg' alt='CT slice'>
+<img src='img/slice_0007.jpg' alt='CT slice'>
+<img src='img/slice_0008.jpg' alt='CT slice'>
+<img src='img/slice_0009.jpg' alt='CT slice'>
+<img src='img/slice_0010.jpg' alt='CT slice'>
+<img src='img/slice_0011.jpg' alt='CT slice'>
+<img src='img/slice_0012.jpg' alt='CT slice'>
+<img src='img/slice_0013.jpg' alt='CT slice'>
+<img src='img/slice_0014.jpg' alt='CT slice'>
+<img src='img/slice_0015.jpg' alt='CT slice'>
+<img src='img/slice_0016.jpg' alt='CT slice'>
+<img src='img/slice_0017.jpg' alt='CT slice'>
+<img src='img/slice_0018.jpg' alt='CT slice'>
+<img src='img/slice_0019.jpg' alt='CT slice'>
+<img src='img/slice_0020.jpg' alt='CT slice'>
+<img src='img/slice_0021.jpg' alt='CT slice'>
+<img src='img/slice_0022.jpg' alt='CT slice'>
+<img src='img/slice_0023.jpg' alt='CT slice'>
+<img src='img/slice_0024.jpg' alt='CT slice'>
+<img src='img/slice_0025.jpg' alt='CT slice'>
+<img src='img/slice_0026.jpg' alt='CT slice'>
+<img src='img/slice_0027.jpg' alt='CT slice'>
+<img src='img/slice_0028.jpg' alt='CT slice'>
+<img src='img/slice_0029.jpg' alt='CT slice'>
+<img src='img/slice_0030.jpg' alt='CT slice'>
+<img src='img/slice_0031.jpg' alt='CT slice'>
+<img src='img/slice_0032.jpg' alt='CT slice'>
+<img src='img/slice_0033.jpg' alt='CT slice'>
+<img src='img/slice_0034.jpg' alt='CT slice'>
+<img src='img/slice_0035.jpg' alt='CT slice'>
+<img src='img/slice_0036.jpg' alt='CT slice'>
+<img src='img/slice_0037.jpg' alt='CT slice'>
+<img src='img/slice_0038.jpg' alt='CT slice'>
+<img src='img/slice_0039.jpg' alt='CT slice'>
+<img src='img/slice_0040.jpg' alt='CT slice'>
+<img src='img/slice_0041.jpg' alt='CT slice'>
+<img src='img/slice_0042.jpg' alt='CT slice'>
+<img src='img/slice_0043.jpg' alt='CT slice'>
+<img src='img/slice_0044.jpg' alt='CT slice'>
+<img src='img/slice_0045.jpg' alt='CT slice'>
+<img src='img/slice_0046.jpg' alt='CT slice'>
+<img src='img/slice_0047.jpg' alt='CT slice'>
+<img src='img/slice_0048.jpg' alt='CT slice'>
+</div>
+<div class='viewer-wrapper'>
+<h2>Scrollable</h2>
+<div class='viewer' id='viewer' tabindex='0'>
+<div class='hud' id='hud'>Slice 1/1</div>
+<img id='viewerImage' src='' alt='Viewer slice'>
+</div>
+<div class='controls'>
+<button id='prevBtn' title='Previous slice (Up/Left)'>◀</button>
+<input id='sliceRange' type='range' min='1' max='1' value='1' step='1'>
+<button id='nextBtn' title='Next slice (Down/Right)'>▶</button>
+<span id='sliceLabel'></span>
+</div>
+<p>Tips: Use mouse wheel or arrow keys to scroll through slices. Click inside the viewer to focus.</p>
+</div>
+<script>
+const IMAGES = ["img/slice_0001.jpg", "img/slice_0002.jpg", "img/slice_0003.jpg", "img/slice_0004.jpg", "img/slice_0005.jpg", "img/slice_0006.jpg", "img/slice_0007.jpg", "img/slice_0008.jpg", "img/slice_0009.jpg", "img/slice_0010.jpg", "img/slice_0011.jpg", "img/slice_0012.jpg", "img/slice_0013.jpg", "img/slice_0014.jpg", "img/slice_0015.jpg", "img/slice_0016.jpg", "img/slice_0017.jpg", "img/slice_0018.jpg", "img/slice_0019.jpg", "img/slice_0020.jpg", "img/slice_0021.jpg", "img/slice_0022.jpg", "img/slice_0023.jpg", "img/slice_0024.jpg", "img/slice_0025.jpg", "img/slice_0026.jpg", "img/slice_0027.jpg", "img/slice_0028.jpg", "img/slice_0029.jpg", "img/slice_0030.jpg", "img/slice_0031.jpg", "img/slice_0032.jpg", "img/slice_0033.jpg", "img/slice_0034.jpg", "img/slice_0035.jpg", "img/slice_0036.jpg", "img/slice_0037.jpg", "img/slice_0038.jpg", "img/slice_0039.jpg", "img/slice_0040.jpg", "img/slice_0041.jpg", "img/slice_0042.jpg", "img/slice_0043.jpg", "img/slice_0044.jpg", "img/slice_0045.jpg", "img/slice_0046.jpg", "img/slice_0047.jpg", "img/slice_0048.jpg"];
+
+(function() {
+  const img = document.getElementById('viewerImage');
+  const hud = document.getElementById('hud');
+  const viewer = document.getElementById('viewer');
+  const slider = document.getElementById('sliceRange');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const label = document.getElementById('sliceLabel');
+  const N = IMAGES.length;
+  let idx = 0;
+
+  function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+  function update() {
+    if (N === 0) return;
+    img.src = IMAGES[idx];
+    hud.textContent = `Slice ${idx+1}/${N}`;
+    slider.max = String(N);
+    slider.value = String(idx + 1);
+    label.textContent = `${idx+1}/${N}`;
+  }
+
+  function setIndex(newIdx) {
+    idx = clamp(newIdx, 0, N-1);
+    update();
+  }
+
+  // Events
+  viewer.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const delta = Math.sign(e.deltaY);
+    setIndex(idx + (delta > 0 ? 1 : -1));
+  }, { passive: false });
+
+  viewer.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+      setIndex(idx + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+      setIndex(idx - 1);
+    } else if (e.key === 'Home') {
+      setIndex(0);
+    } else if (e.key === 'End') {
+      setIndex(N - 1);
+    }
+  });
+
+  slider.addEventListener('input', () => {
+    setIndex(parseInt(slider.value, 10) - 1);
+  });
+
+  prevBtn.addEventListener('click', () => setIndex(idx - 1));
+  nextBtn.addEventListener('click', () => setIndex(idx + 1));
+
+  // Initialize
+  if (N > 0) {
+    setIndex(0);
+    // Focus viewer for key events
+    viewer.setAttribute('tabindex', '0');
+    viewer.focus({ preventScroll: true });
+  } else {
+    hud.textContent = 'No images';
+  }
+})();
+
+</script>
+</body></html>
